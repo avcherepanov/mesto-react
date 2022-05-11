@@ -1,0 +1,4 @@
+.element__heartContainer {
+    display: flex;
+    flex-direction: column;
+  }
