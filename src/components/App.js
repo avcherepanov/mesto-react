@@ -2,12 +2,10 @@ import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../utils/Api";
 import { CurrentUserContext } from '../context/CurrentUserContext'
-import { CardsContext } from '../context/CardsContext'
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import EditProfilePopup from "./EditProfilePopup";
@@ -15,7 +13,6 @@ import EditProfilePopup from "./EditProfilePopup";
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -108,7 +105,6 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <CardsContext.Provider value={cards}>
     <div className="page">
       <Header />
       <Main
@@ -116,7 +112,7 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onCardClick={handleCardClick}
-        setCards={setCards}
+        cards={cards}
         onCardLike={handleCardLike}
         onCardDelete={handleCardDelete}
       />
@@ -126,7 +122,6 @@ function App() {
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>
-    </CardsContext.Provider>
     </CurrentUserContext.Provider>
   );
 }
