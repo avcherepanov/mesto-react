@@ -26,6 +26,14 @@ export class Api {
     return this._makeRequest('/cards')
   }
 
+  changeLikeCardStatus(id, isLiked) {
+    if (isLiked) {
+      return this.addLike(id)
+    } else {
+      return this.deleteLike(id)
+    }
+  }
+
   editProfile(name, about) {
     return this._makeRequest("/users/me", "PATCH", {
       body: JSON.stringify({
@@ -74,4 +82,3 @@ const api = new Api({
 });
 
 export default api;
-
